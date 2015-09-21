@@ -1,8 +1,8 @@
-# Create dbNSFP3 hg19 BCF
+# Create dbNSFP3 hg19 BCF file
 #
-# Convert a directory of dbNSFP3 files into a 
-# single BCF file (with .csi index). Output will
-# be written in the present working directory.
+# Convert a directory of dbNSFP3 variant annotation files into a 
+# single BCF file (with .csi index file). Output will be written
+# in the present working directory.
 #
 # Example usage:
 #   ./create_dbNSFP3_hg19_BCF.sh /path/to/dbNSFP3.x/
@@ -56,7 +56,7 @@ echo "- Removing $SOURCE.txt..."
 rm $SOURCE.txt
 echo "   \--> Done! $SOURCE.txt has been removed"
 
-echo "- Compression $SOURCE.vcf.gz..."
+echo "- Compressing $SOURCE.vcf..."
 bgzip -f $SOURCE.vcf
 echo "   \--> Done! $SOURCE.vcf.gz has been created"
 
