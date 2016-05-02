@@ -45,6 +45,23 @@ The conversion script requires only one argument, which is the path to the dbNSF
    
 All output files will be written to the user's current directory and will be prefixed with `dbNSFPv3.2a`.
 
+## Tips
+
+### Get a job
+
+This script will take a *very* long time to complete, and therefore it is highly recommended to submit it as a `qsub` job.
+
+### Subset before querying
+
+Due to the fact that dbNSFP is so large, simple queries can take a very long time to complete. In order to speed up queries, it is recommended to first subset the dbNSFP BCF to your regions of interest before performing queries. Use the `bcftools view -r ...` option to subset the BCF.
+
+## A warning about intermediate files
+
+This script creates several intermediate files in order to create the final BCF file. The user should be aware of the following in regards to these files:
+
+1. dbNSFP is *very* large, and therefore the intermediate files are *very* large. You will need upwards of ~250 GB of free space (in addition to the size of dbNSFP itself) in order to run the script. The final BCF file will only be around ~20 GB.
+1. If the script is interrupted, it will try to pick up where it left off when resubmitted. The script will automatically skip a step if the resulting intermediate file already exists. However, it is **very important** that all intermediate files be complete. If you know that an intermediate file is not complete, then delete it and let the script redo that step. For example, if your logs show that the script failed while trying to create *dbNSFPv3.X.vcf.gz* (perhaps because `vcf-sort` was not in your `$PATH`) then you should delete that file and rerun the script. The script will immediately attempt to create *dbNSFPv3.X.vcf.gz* again.
+
 ## Handling illegal VCF characters
 
 The VCF format restricts all spaces, semi-colons, and equals-signs from being present in an any INFO field. Additionally, commas are reserved for separating allele-specific values. Therefore, these characters are [URL-encoded](http://www.w3schools.com/tags/ref_urlencode.asp) before they are written to the output VCF.
