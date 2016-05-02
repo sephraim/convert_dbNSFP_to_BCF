@@ -31,7 +31,7 @@ As another example, the `GERP++_RS` and `GERP++_RS_rankscore` columns will becom
 
 If you are unsure of how the script converted some headers, you can view all INFO in the output BCF by running:
 
-    bcftools view -h dbNSFP3.X.bcf.gz | grep '#INFO='
+    bcftools view -h dbNSFP3.X.bcf.gz | grep '^##INFO='
 
 ## Usage
 
